@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="website_pages_form_view_alt_text" model="ir.ui.view">
+        <field name="name">website.page.form.alt.text</field>
+        <field name="model">website.page</field>
+        <field name="inherit_id" ref="website.website_pages_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="action_generate_alt_text" type="object"
+                            string="Generate Missing Alt Text" class="btn-primary"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_website_page_generate_alt_text" model="ir.actions.server">
+        <field name="name">Generate Missing Alt Text</field>
+        <field name="model_id" ref="website.model_website_page"/>
+        <field name="binding_model_id" ref="website.model_website_page"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">action = records.action_generate_alt_text()</field>
+    </record>
+
+</odoo>

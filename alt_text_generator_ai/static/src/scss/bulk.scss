@@ -1,0 +1,28 @@
+// Make the row checkboxes of the Bulk Alt Text screen easy to see.
+.o_alt_text_bulk_lines {
+    .o_list_record_selector,
+    .o_data_cell .o-checkbox,
+    .o_data_cell .form-check {
+        .form-check-input {
+            width: 1.3rem;
+            height: 1.3rem;
+            border: 2px solid #b79bad;
+            background-color: #fff;
+            opacity: 1;
+
+            &:hover {
+                border-color: #714b67;
+            }
+
+            &:checked {
+                background-color: #714b67;
+                border-color: #714b67;
+            }
+        }
+    }
+
+    // Odoo pads lists with empty filler rows; show only real rows.
+    tbody tr:not(.o_data_row) {
+        display: none;
+    }
+}

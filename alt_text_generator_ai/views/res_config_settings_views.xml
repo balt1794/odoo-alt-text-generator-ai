@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_alt_text" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.alt.text</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="95"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Alt Text Generator AI" string="Alt Text Generator AI"
+                     name="alt_text_generator_ai" groups="base.group_system">
+                    <block title="Alt Text Generator AI">
+                        <setting string="API Key">
+                            <field name="alt_text_ai_api_key" password="True"/>
+                        </setting>
+                        <setting string="Language" help="The language the alt text is written in.">
+                            <field name="alt_text_ai_language"/>
+                        </setting>
+                        <setting string="Credits left"
+                                 help="Updated when you save and after every generation.">
+                            <field name="alt_text_ai_credits_left"/>
+                            <div>
+                                <button name="action_alt_text_refresh_credits" type="object"
+                                        string="Check credits" class="btn-link" icon="oi-arrow-right"/>
+                            </div>
+                            <div>
+                                <button name="action_alt_text_get_credits" type="object"
+                                        string="Get more credits" class="btn-link" icon="oi-arrow-right"/>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

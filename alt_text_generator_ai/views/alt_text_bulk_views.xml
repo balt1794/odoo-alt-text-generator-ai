@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="alt_text_bulk_view_form" model="ir.ui.view">
+        <field name="name">alt.text.bulk.form</field>
+        <field name="model">alt.text.bulk</field>
+        <field name="arch" type="xml">
+            <form string="Bulk Alt Text" create="false" delete="false">
+                <header>
+                    <button name="action_generate" type="object" class="btn-primary"
+                            string="Generate Alt Text for Selected"
+                            invisible="selected_count == 0"/>
+                    <button name="action_select_all" type="object" string="Select all"/>
+                    <button name="action_select_none" type="object" string="Select none"/>
+                </header>
+                <sheet>
+                    <div class="alert alert-info" role="alert" invisible="not summary">
+                        <field name="summary" nolabel="1"/>
+                    </div>
+                    <div class="alert alert-warning" role="alert" invisible="not not_enough_credits">
+                        You selected more images than your credits left. Generation stops when the credits run out.
+                        <a href="https://alttextgeneratorai.com/pricing" target="_blank">Get more credits</a>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="credits_left"/>
+                            <field name="selected_count" string="Images selected (1 credit each)"/>
+                            <field name="include_existing"/>
+                        </group>
+                    </group>
+                    <field name="line_ids" nolabel="1" class="o_alt_text_bulk_lines">
+                        <list create="false" delete="false" editable="bottom"
+                              decoration-success="result == 'Done'" decoration-danger="result == 'Stopped'"
+                              decoration-warning="result == 'Skipped'">
+                            <field name="selected" string=" "/>
+                            <field name="thumb_url" string="Image" widget="image_url"
+                                   options="{'size': [72, 72]}" readonly="1" force_save="1"/>
+                            <field name="name" string="Page / Product" readonly="1" force_save="1"/>
+                            <field name="kind" string="Type" readonly="1" force_save="1"/>
+                            <field name="result" readonly="1" force_save="1"/>
+                            <field name="alt_text" string="Alt text" readonly="1" force_save="1"/>
+                            <field name="res_model" column_invisible="1" force_save="1"/>
+                            <field name="res_id" column_invisible="1" force_save="1"/>
+                            <field name="src" column_invisible="1" force_save="1"/>
+                            <field name="had_alt" column_invisible="1" force_save="1"/>
+                        </list>
+                    </field>
+                    <p class="text-muted" invisible="line_ids">
+                        Every image already has alt text.
+                    </p>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="alt_text_bulk_action" model="ir.actions.act_window">
+        <field name="name">Bulk Alt Text</field>
+        <field name="res_model">alt.text.bulk</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="alt_text_bulk_menu"
+              name="Bulk Alt Text"
+              parent="website.menu_site"
+              sequence="35"
+              action="alt_text_bulk_action"
+              groups="website.group_website_designer"/>
+
+</odoo>
