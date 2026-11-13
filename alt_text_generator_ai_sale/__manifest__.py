@@ -11,6 +11,7 @@
     'data': [
         'views/product_image_views.xml',
     ],
+    'images': ['static/description/banner.png'],
     'auto_install': True,
     'installable': True,
     'application': False,
